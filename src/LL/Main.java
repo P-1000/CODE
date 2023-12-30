@@ -8,13 +8,15 @@ public class Main {
         list.insertAtEnd(50);
         list.insertAtEnd(60);
         list.insertAtStart(0);
-        list.insertAtEnd(80);
-        list.insertAtStart(5);
-        list.deleteFirst();
+        list.insert(999 , 5);
         list.deleteLast();
-        list.insertAtEnd(80);
+        list.insert(9999 , 2);
+        list.insert(30 , 3);
+//        list.deleteFirst();
+//        list.display();
+//        list.delete(3);
         list.display();
-        list.delete(3);
+        list.delete(2);
         list.display();
     }
 }

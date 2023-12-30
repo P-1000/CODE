@@ -11,119 +11,107 @@ public class LL {
         this.size = 0;
     }
 
-    public void insertAtStart(int data){
-        Node node = new Node(data);
+    public void insertAtStart(int val){
+        Node node = new Node(val);
         node.next = head;
         head = node;
 
-        if(tail==null){
+        if(tail == null){
             tail = head;
         }
-
         size++;
     }
 
-    public void insertAtEnd(int data){
+    public void insertAtEnd(int val){
         if(tail==null){
-            insertAtStart(data);
+            insertAtStart(val);
             return;
         }
-        Node node = new Node(data);
+        Node node = new Node(val);
         tail.next = node;
         tail = node;
-
         size++;
     }
 
-
-    public void display(){
-        Node temp = head;
-        while(temp!=null){
-            System.out.print(temp.data + " ->");
-            temp = temp.next;
+    public void insert(int val , int index){
+        if(index==0){
+            insertAtStart(val);
+            return;
         }
-        System.out.println("End");
-    }
-
-    public void insert(int data , int index){
-        if(index == 0){
-            insertAtStart(data);
-        }
-
-        if(index == size){
-            insertAtEnd(data);
+        if(index==size){
+            insertAtEnd(val);
+            return;
         }
 
         Node temp = head;
-        for (int i = 1; i <index ; i++) {
+        for(int i =1;i<index ; i++){
             temp = temp.next;
         }
-        Node node = new Node(data , temp.next);
+        Node node = new Node(val,temp.next);
         temp.next = node;
-
         size++;
     }
 
     public int deleteFirst(){
-        int data = head.data;
+        int val = head.data;
         head = head.next;
         if(head == null){
             tail = null;
         }
         size--;
-        return data;
+        return val;
     }
 
-
-
-    public Node get(int index) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+    public Node get(int index){
+        if(index<0 || index>=size){
+            throw new IndexOutOfBoundsException("Index "+ index + ", Size : "  + size );
         }
-
         Node node = head;
-        for (int i = 0; i < index; i++) {
+        for (int i = 0; i <index ; i++) {
             node = node.next;
         }
         return node;
     }
 
-
-
     public int deleteLast(){
-        if(size <=1){
+        if(size<=1){
             return deleteFirst();
         }
-
-        Node secondLast = get(size - 2);
+        Node secondLast = get(size-2);
         int val = tail.data;
-
         tail = secondLast;
         tail.next = null;
-
         return val;
-
     }
 
     public int delete(int index){
         if(index == 0){
             return deleteFirst();
         }
-        if(index == size -1){
+        if(index == size-1){
             return deleteLast();
         }
 
-        Node previous = get(index -1);
-        int val = previous.next.data;
-        previous.next  = previous.next.next;
-        return  val;
+        Node prev = get(index -1);
+        int val = prev.next.data;
+        prev.next = prev.next.next;
+        return val;
+    }
 
+    public void display(){
+        Node temp = head;
+        while(temp!=null){
+            System.out.print(temp.data + "-> ");
+            temp = temp.next;
+        }
+        System.out.println("End");
     }
 
 
+
     private class Node{
-        int data;
-        Node next;
+        private int data;
+        private Node next;
 
         public Node(int data) {
             this.data = data;
@@ -133,7 +121,5 @@ public class LL {
             this.data = data;
             this.next = next;
         }
-
-
     }
 }
